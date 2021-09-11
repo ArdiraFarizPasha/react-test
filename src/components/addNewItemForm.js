@@ -76,6 +76,7 @@ export const AddNewItemForm = () => {
             maxNumber={maxNumber}
             maxFileSize={100000}
             dataURLKey="data_url"
+            acceptType={['jpg', 'png']}	
           >
             {({
               imageList,
