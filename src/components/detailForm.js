@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { Field, Formik, Form, useFormik } from "formik";
 import { ButtonUploadCancelWrapper, ButtonUploadImage, FormFieldWrapper, InputField, RemoveImage, SubmitButton, UploadSectionWrapper } from "styled";
 import axios from "axios";
-import { UPDATE_ITEM_DATA } from "utils/api";
+import { GET_ALL_ITEMS, UPDATE_ITEM_DATA } from "utils/api";
+import { useDispatch } from "react-redux";
+import { setItemList, setOpenModalDetail } from "redux/slice";
+import Swal from "sweetalert2";
 
 export const RenderForm = (props) => {
   const [images, setImages] = React.useState([]);
@@ -13,7 +16,8 @@ export const RenderForm = (props) => {
     setImages(imageList);
   };
   const { name, image_url, id, sellPrice, buyPrice, stock } = props.data.data;
-  const propsImages = [{ data_url: image_url }]
+  console.log(props, 'props')
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
       image_url: images.length > 0 ? images[0].data_url : image_url,
@@ -35,7 +39,15 @@ export const RenderForm = (props) => {
   const handleUpdateData = async (payload) => {
     try {
       const response = await axios.put(UPDATE_ITEM_DATA(id), payload)
-      alert('Data updated successfully')
+      if (response.data) {
+        Swal.fire(
+          'Update success!',
+          'Your file has been updated.',
+          'success'
+        )
+        const response = await axios.get(GET_ALL_ITEMS)
+        dispatch(setItemList(response.data))
+      }
     } catch (error) {
       alert(error)
     }

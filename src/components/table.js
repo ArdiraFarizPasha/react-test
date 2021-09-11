@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux'
 import { handleDeleteItemFromList } from 'redux/slice'
 
 export const TableData = (props) => {
-  const [open, setModalOpen] = useState(false)
   const dispatch = useDispatch()
 
   const showPopUp = (id) => {

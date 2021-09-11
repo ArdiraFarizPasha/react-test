@@ -6,6 +6,7 @@ import axios from "axios";
 import { ADD_NEW_ITEM, GET_ALL_ITEMS, UPDATE_ITEM_DATA } from "utils/api";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAddNewItemToList, setItemList, setOpenModalAddNew } from "redux/slice";
+import Swal from "sweetalert2";
 
 export const AddNewItemForm = () => {
   const [images, setImages] = React.useState([]);
@@ -35,6 +36,11 @@ export const AddNewItemForm = () => {
     try {
       const response = await axios.post(ADD_NEW_ITEM, payload)
       if (response.data) {
+        Swal.fire(
+          'Create success!',
+          'Your file has been created.',
+          'success'
+        )
         const response = await axios.get(GET_ALL_ITEMS)
         dispatch(setItemList(response.data))
         dispatch(setOpenModalAddNew(false))
