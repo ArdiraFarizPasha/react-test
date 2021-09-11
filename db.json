@@ -2,7 +2,7 @@
   "items": [
     {
       "image_url": "https://image.freepik.com/free-photo/fashion-shoes-sneakers_1203-7529.jpg",
-      "name": "sepatu",
+      "name": "sepatuasda",
       "sellPrice": 500000,
       "buyPrice": 100000,
       "stock": 100,
@@ -18,19 +18,35 @@
     },
     {
       "image_url": "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png",
-      "name": "HAHAHA",
-      "sellPrice": 1,
-      "buyPrice": 123123,
-      "stock": 2,
-      "id": 4
-    },
-    {
-      "image_url": "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png",
       "name": "Halo",
       "sellPrice": 12,
       "buyPrice": 123123,
       "stock": 1,
       "id": 5
+    },
+    {
+      "image_url": "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png",
+      "name": "huhuaha",
+      "sellPrice": 123123,
+      "buyPrice": 123123,
+      "stock": 123,
+      "id": 6
+    },
+    {
+      "image_url": "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png",
+      "name": "HAHAHA",
+      "sellPrice": 123,
+      "buyPrice": 123123,
+      "stock": 12,
+      "id": 9
+    },
+    {
+      "image_url": "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png",
+      "name": "HAHAHA1",
+      "sellPrice": 1,
+      "buyPrice": 123,
+      "stock": 1,
+      "id": 10
     }
   ]
 }

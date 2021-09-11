@@ -4,18 +4,21 @@ import { useFormik } from "formik";
 import { ButtonUploadCancelWrapper, ButtonUploadImage, FormFieldWrapper, InputField, RemoveImage, SubmitButton, UploadSectionWrapper } from "styled";
 import axios from "axios";
 import { ADD_NEW_ITEM, GET_ALL_ITEMS } from "utils/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setItemList, setOpenModalAddNew } from "redux/slice";
 import Swal from "sweetalert2";
 
 export const AddNewItemForm = () => {
   const [images, setImages] = React.useState([]);
+  const [error, setError] = React.useState(0)
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
   const dispatch = useDispatch()
+  const values = useSelector(state => state.store)
+  const listItems = values.itemList
   const formik = useFormik({
     initialValues: {
       image_url: '',
@@ -25,8 +28,22 @@ export const AddNewItemForm = () => {
       stock: '',
     },
     onSubmit: values => {
-      if (images.length > 0) {
-        handleUpdateData({ ...values, image_url: 'https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png' })
+      let counter = 0
+      listItems.map((item, idx) => {
+        if(values.name.toLowerCase() === item.name.toLowerCase()) {
+          counter++
+        }
+      })
+      if(counter === 0) {
+        if (images.length > 0) {
+          handleUpdateData({ ...values, image_url: 'https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png' })
+        }
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Name is already taken!',
+        })
       }
     },
   });
