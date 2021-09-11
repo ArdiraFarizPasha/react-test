@@ -1,16 +1,11 @@
 import { Modal, Button } from 'react-bootstrap'
-import React, { useEffect, useState } from 'react'
-import ImageUploading from "react-images-uploading";
+import React, { useState } from 'react'
 import { RenderForm } from './detailForm';
 
 export const ModalData = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  useEffect(() => {
-    setShow(props.open)
-  }, [])
 
   return (
     <>

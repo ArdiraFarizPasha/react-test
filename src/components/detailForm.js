@@ -1,11 +1,11 @@
 import ImageUploading from "react-images-uploading";
-import React, { useEffect, useState } from 'react'
-import { Field, Formik, Form, useFormik } from "formik";
+import React from 'react'
+import { useFormik } from "formik";
 import { ButtonUploadCancelWrapper, ButtonUploadImage, FormFieldWrapper, InputField, RemoveImage, SubmitButton, UploadSectionWrapper } from "styled";
 import axios from "axios";
 import { GET_ALL_ITEMS, UPDATE_ITEM_DATA } from "utils/api";
 import { useDispatch } from "react-redux";
-import { setItemList, setOpenModalDetail } from "redux/slice";
+import { setItemList } from "redux/slice";
 import Swal from "sweetalert2";
 
 export const RenderForm = (props) => {
@@ -16,7 +16,6 @@ export const RenderForm = (props) => {
     setImages(imageList);
   };
   const { name, image_url, id, sellPrice, buyPrice, stock } = props.data.data;
-  console.log(props, 'props')
   const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
@@ -74,10 +73,8 @@ export const RenderForm = (props) => {
               dragProps,
               errors
             }) => (
-              // write your building UI
               <div className="upload__image-wrapper">
                 {imageList.length > 0 ? imageList.map((image, index) => {
-                  console.log(image, '<<< image')
                   return (
                     <div key={index} className="image-item" style={{ display: 'flex', justifyContent: 'center' }}>
                       <img src={image.data_url} alt="" width="100" />

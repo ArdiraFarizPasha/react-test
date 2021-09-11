@@ -1,6 +1,5 @@
-import { useState } from 'react'
 import { Table } from 'react-bootstrap'
-import { ButtonShowDetails, TableRow, TrashIcon } from 'styled'
+import { TableRow, TrashIcon } from 'styled'
 import { ModalData } from './modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'

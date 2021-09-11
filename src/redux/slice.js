@@ -29,7 +29,6 @@ export const storeSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const {
   setItemList,
   setOpenModalAddNew,

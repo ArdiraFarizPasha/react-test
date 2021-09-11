@@ -1,11 +1,11 @@
 import ImageUploading from "react-images-uploading";
-import React, { useEffect, useState } from 'react'
-import { Field, Formik, Form, useFormik } from "formik";
+import React from 'react'
+import { useFormik } from "formik";
 import { ButtonUploadCancelWrapper, ButtonUploadImage, FormFieldWrapper, InputField, RemoveImage, SubmitButton, UploadSectionWrapper } from "styled";
 import axios from "axios";
-import { ADD_NEW_ITEM, GET_ALL_ITEMS, UPDATE_ITEM_DATA } from "utils/api";
-import { useDispatch, useSelector } from "react-redux";
-import { handleAddNewItemToList, setItemList, setOpenModalAddNew } from "redux/slice";
+import { ADD_NEW_ITEM, GET_ALL_ITEMS } from "utils/api";
+import { useDispatch } from "react-redux";
+import { setItemList, setOpenModalAddNew } from "redux/slice";
 import Swal from "sweetalert2";
 
 export const AddNewItemForm = () => {
@@ -32,7 +32,6 @@ export const AddNewItemForm = () => {
   });
 
   const handleUpdateData = async (payload) => {
-    console.log(payload, '<<< payload')
     try {
       const response = await axios.post(ADD_NEW_ITEM, payload)
       if (response.data) {
@@ -45,7 +44,6 @@ export const AddNewItemForm = () => {
         dispatch(setItemList(response.data))
         dispatch(setOpenModalAddNew(false))
       }
-      // dispatch(handleAddNewItemToList(response.data))
     } catch (error) {
       alert(error)
     }
@@ -72,10 +70,8 @@ export const AddNewItemForm = () => {
               dragProps,
               errors
             }) => (
-              // write your building UI
               <div className="upload__image-wrapper">
                 {imageList.length > 0 && imageList.map((image, index) => {
-                  console.log(image, '<<< image')
                   return (
                     <div key={index} className="image-item" style={{ display: 'flex', justifyContent: 'center' }}>
                       <img src={image.data_url} alt="" width="100" />
