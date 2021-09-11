@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "image_url": "https://image.freepik.com/free-photo/fashion-shoes-sneakers_1203-7529.jpg",
+      "name": "nike",
+      "buyPrice": 20000,
+      "sellPrice": 100,
+      "stock": 101
+    },
+    {
+      "id": 2,
+      "image_url": "https://image.freepik.com/free-photo/fashion-shoes-sneakers_1203-7529.jpg",
+      "name": "adidas",
+      "buyPrice": 100000,
+      "sellPrice": 500000,
+      "stock": 100
+    },
+    {
+      "id": 3,
+      "image_url": "https://image.freepik.com/free-photo/fashion-shoes-sneakers_1203-7529.jpg",
+      "name": "broke",
+      "buyPrice": 8888,
+      "sellPrice": 990,
+      "stock": 170
+    },
+    {
+      "id": 4,
+      "image_url": "https://image.freepik.com/free-photo/fashion-shoes-sneakers_1203-7529.jpg",
+      "name": "adidas",
+      "buyPrice": 8888,
+      "sellPrice": 990,
+      "stock": 170
+    }
+  ]
+}
