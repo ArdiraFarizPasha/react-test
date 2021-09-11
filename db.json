@@ -31,14 +31,6 @@
       "buyPrice": 123123,
       "stock": 1,
       "id": 5
-    },
-    {
-      "image_url": "https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png",
-      "name": "HAHAHA",
-      "sellPrice": 121,
-      "buyPrice": 123123,
-      "stock": 121,
-      "id": 6
     }
   ]
 }
