@@ -105,3 +105,10 @@ export const InputField = styled.input`
   border-radius: 6px;
   padding-left: 10px;
 `
+
+export const TrashIcon = styled.div`
+  display: flex;
+  align-items: center;
+  height: 38px;
+  color: red;
+`

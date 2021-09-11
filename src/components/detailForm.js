@@ -109,7 +109,7 @@ export const RenderForm = (props) => {
                     name="name"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.name || name}
+                    value={formik.values.name}
                   />
                 </div>
               </FormFieldWrapper>
@@ -121,7 +121,7 @@ export const RenderForm = (props) => {
                     name="buyPrice"
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.buyPrice || buyPrice}
+                    value={formik.values.buyPrice}
                   />
                 </div>
               </FormFieldWrapper>
@@ -133,7 +133,7 @@ export const RenderForm = (props) => {
                     name="sellPrice"
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.sellPrice || sellPrice}
+                    value={formik.values.sellPrice}
                   />
                 </div>
               </FormFieldWrapper>
@@ -145,7 +145,7 @@ export const RenderForm = (props) => {
                     name="stock"
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.stock || stock}
+                    value={formik.values.stock}
                   />
                 </div>
               </FormFieldWrapper>

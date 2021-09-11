@@ -1,12 +1,17 @@
 import { Modal, Button } from 'react-bootstrap'
 import React, { useEffect, useState } from 'react'
 import ImageUploading from "react-images-uploading";
-import { RenderForm } from './detailForm';
+import { AddNewItemForm } from './addNewItemForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOpenModalAddNew } from 'redux/slice';
 
 export const ModalAddNewItem = () => {
+  const dispatch = useDispatch()
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => dispatch(setOpenModalAddNew(false))
+  const handleShow = () => dispatch(setOpenModalAddNew(true))
+  const values = useSelector(state => state.store)
+  const isModalOpen = values.isModalAddNew
 
   // useEffect(() => {
   //   setShow(props.open)
@@ -18,12 +23,12 @@ export const ModalAddNewItem = () => {
         Add New Item
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={isModalOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Item Detail</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ padding: '0rem 2rem'}}>
-          <RenderForm />
+          <AddNewItemForm />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

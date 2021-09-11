@@ -4,16 +4,24 @@ import { Column, Container, SellItemButton, SellItemButtonWrapper, TableWrapper,
 import { TableData } from './components/table';
 import { ModalData } from './components/modal';
 import axios from 'axios';
-import { GET_ALL_ITEMS } from 'utils/api';
-import {ModalAddNewItem} from 'components/modalAddNewItem'
+import { DELETE_ITEM, GET_ALL_ITEMS } from 'utils/api';
+import { ModalAddNewItem } from 'components/modalAddNewItem'
+import { useSelector, useDispatch } from 'react-redux'
+import { setItemList } from 'redux/slice';
+
 
 function App() {
   const [items, setItems] = React.useState([])
+  const dispatch = useDispatch()
+  const values = useSelector((state) => state.store)
+  const itemList = values.itemList
+  console.log(itemList, '<<< item list')
 
   const fetchItemList = async () => {
     try {
-      const ItemList = await axios.get(GET_ALL_ITEMS)
-      setItems(ItemList.data);
+      const response = await axios.get(GET_ALL_ITEMS)
+      dispatch(setItemList(response.data))
+      setItems(response.data)
     } catch (error) {
       alert(error)
     }
@@ -21,7 +29,7 @@ function App() {
 
   useEffect(() => {
     fetchItemList()
-  }, [])
+  }, [dispatch])
 
   return (
     <Container>
@@ -30,14 +38,11 @@ function App() {
       </TitleWrapper>
       <SellItemButtonWrapper>
         <ModalAddNewItem />
-        <SellItemButton>
-          Add New Item
-        </SellItemButton>
       </SellItemButtonWrapper>
       <TableWrapper>
         <Column className="col-lg-8 col-md-12 col-sm-12">
           <TableData
-            data={items}
+            data={itemList}
           />
         </Column>
       </TableWrapper>

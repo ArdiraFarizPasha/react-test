@@ -3,39 +3,43 @@ import React, { useEffect, useState } from 'react'
 import { Field, Formik, Form, useFormik } from "formik";
 import { ButtonUploadCancelWrapper, ButtonUploadImage, FormFieldWrapper, InputField, RemoveImage, SubmitButton, UploadSectionWrapper } from "styled";
 import axios from "axios";
-import { UPDATE_ITEM_DATA } from "utils/api";
+import { ADD_NEW_ITEM, GET_ALL_ITEMS, UPDATE_ITEM_DATA } from "utils/api";
+import { useDispatch, useSelector } from "react-redux";
+import { handleAddNewItemToList, setItemList, setOpenModalAddNew } from "redux/slice";
 
-export const AddNewItemForm = (props) => {
+export const AddNewItemForm = () => {
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-  const { name, image_url, id, sellPrice, buyPrice, stock } = props.data.data;
-  const propsImages = [{ data_url: image_url }]
+  const dispatch = useDispatch()
   const formik = useFormik({
     initialValues: {
-      image_url: images.length > 0 ? images[0].data_url : image_url,
-      name: name,
-      sellPrice: sellPrice,
-      buyPrice: buyPrice,
-      stock: stock,
+      image_url: '',
+      name: '',
+      sellPrice: '',
+      buyPrice: '',
+      stock: '',
     },
     onSubmit: values => {
       if (images.length > 0) {
-        const updatedValues = { ...values, image_url: images[0].data_url }
-        handleUpdateData(updatedValues)
-      } else {
-        handleUpdateData(values)
+        handleUpdateData({ ...values, image_url: 'https://cdn1.iconfinder.com/data/icons/logos-brands-in-colors/231/among-us-player-white-512.png' })
       }
     },
   });
 
   const handleUpdateData = async (payload) => {
+    console.log(payload, '<<< payload')
     try {
-      const response = await axios.put(UPDATE_ITEM_DATA(id), payload)
-      alert('Data updated successfully')
+      const response = await axios.post(ADD_NEW_ITEM, payload)
+      if (response.data) {
+        const response = await axios.get(GET_ALL_ITEMS)
+        dispatch(setItemList(response.data))
+        dispatch(setOpenModalAddNew(false))
+      }
+      // dispatch(handleAddNewItemToList(response.data))
     } catch (error) {
       alert(error)
     }
@@ -64,7 +68,7 @@ export const AddNewItemForm = (props) => {
             }) => (
               // write your building UI
               <div className="upload__image-wrapper">
-                {imageList.length > 0 ? imageList.map((image, index) => {
+                {imageList.length > 0 && imageList.map((image, index) => {
                   console.log(image, '<<< image')
                   return (
                     <div key={index} className="image-item" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -77,12 +81,7 @@ export const AddNewItemForm = (props) => {
                   </div> */}
                     </div>
                   )
-                })
-                  :
-                  <div className="image-item" style={{ display: 'flex', justifyContent: 'center' }}>
-                    <img src={image_url} alt="" width="100" />
-                  </div>
-                }
+                })}
                 {errors && <div>Image size is too big</div>}
                 <ButtonUploadCancelWrapper>
                   <ButtonUploadImage
@@ -90,7 +89,7 @@ export const AddNewItemForm = (props) => {
                     onClick={onImageUpload}
                     {...dragProps}
                   >
-                    {imageList.length > 0 || formik.values.image_url ? 'Change Image' : 'Upload Image'}
+                    {imageList.length > 0 ? 'Change Image' : 'Upload Image'}
                   </ButtonUploadImage>
                   <RemoveImage onClick={onImageRemoveAll}>Remove</RemoveImage>
                 </ButtonUploadCancelWrapper>
@@ -109,7 +108,7 @@ export const AddNewItemForm = (props) => {
                     name="name"
                     type="text"
                     onChange={formik.handleChange}
-                    value={formik.values.name || name}
+                    value={formik.values.name}
                   />
                 </div>
               </FormFieldWrapper>
@@ -121,7 +120,7 @@ export const AddNewItemForm = (props) => {
                     name="buyPrice"
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.buyPrice || buyPrice}
+                    value={formik.values.buyPrice}
                   />
                 </div>
               </FormFieldWrapper>
@@ -133,7 +132,7 @@ export const AddNewItemForm = (props) => {
                     name="sellPrice"
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.sellPrice || sellPrice}
+                    value={formik.values.sellPrice}
                   />
                 </div>
               </FormFieldWrapper>
@@ -145,7 +144,7 @@ export const AddNewItemForm = (props) => {
                     name="stock"
                     type="number"
                     onChange={formik.handleChange}
-                    value={formik.values.stock || stock}
+                    value={formik.values.stock}
                   />
                 </div>
               </FormFieldWrapper>
